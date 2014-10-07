@@ -73,14 +73,17 @@ void performOTP (char *_message, char *_key)
    }
    int i = 0;
 
-   char buffer_m [4096];
-   char buffer_k [4096];
+   char buffer_m [1024];
+   char buffer_k [1024];
+
+   memset (buffer_m, 0, sizeof (buffer_m));
+   memset (buffer_k, 0, sizeof (buffer_k));
 
    // Read in the key
-   fgets (buffer_k, 4096, k);
+   fgets (buffer_k, 1024, k);
 
    // Loop, reading in each message
-   while (fgets (buffer_m, 4096, m))
+   while (fgets (buffer_m, 1024, m))
    {
       i = 0;
       while (buffer_m [i] != '\0')
