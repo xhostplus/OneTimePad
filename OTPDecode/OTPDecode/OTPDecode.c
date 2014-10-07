@@ -53,7 +53,7 @@ int main (int argc, char *argv [])
    {
       int val = hex_to_ascii (cipher [i], cipher [i + 1]);
 
-      printf ("%d ", (val ^ message [i / 2]));
+      printf ("%02X", (val ^ message [i / 2]));
 
       key [i / 2] = (val ^ message [i / 2]);
    }
