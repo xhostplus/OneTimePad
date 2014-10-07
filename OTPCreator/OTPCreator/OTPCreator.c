@@ -81,10 +81,12 @@ void performOTP (char *_message, char *_key)
 
    // Read in the key
    fgets (buffer_k, 1024, k);
+   buffer_k [strlen (buffer_k) - 1] = '\0';
 
    // Loop, reading in each message
    while (fgets (buffer_m, 1024, m))
    {
+      buffer_m [strlen (buffer_m) - 1] = '\0';
       i = 0;
       while (buffer_m [i] != '\0')
       {
