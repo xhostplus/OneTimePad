@@ -28,6 +28,7 @@ int hex_to_ascii (char c, char d)
 int isLetter (char c)
 {
    if ((c >= 0x41 && c <= 0x5A) || (c >= 0x61 && c <= 0x7A))
+   //if (c > 0x20 && c < 0x7F)
       return 1;
 
    return 0;
@@ -113,7 +114,7 @@ void main (int argc, char *argv [])
                // either cipher texts contain a space
                // If we have encounted a space before, then 
                // in fact, this is a space
-               if ((xor > 0x20) && (xor <= 0x7E))
+               if (isLetter(xor))
                {
                   //printf ("%c", xor);
                   spaces [i] [k / 2]++;
