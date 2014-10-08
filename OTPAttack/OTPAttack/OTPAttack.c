@@ -51,6 +51,8 @@ void main (int argc, char *argv [])
 
    f = fopen (argv [1], "r");
    fgets (decode, sizeof (decode), f);
+   if (decode [strlen (decode)] == '\n')
+      decode [strlen (decode) - 1] = '\0';
    fclose (f);
 
    // Open the file containing the ciphertexts
@@ -58,6 +60,8 @@ void main (int argc, char *argv [])
 
    // Get the number of cipher texts in the file
    fgets (buffer, sizeof (buffer), f);
+   if (buffer [strlen (buffer)] == '\n')
+      buffer [strlen (buffer) - 1] = '\0';
    sscanf (buffer, "%d", &num_ciphers);
 
    // Allocate arrays
@@ -69,8 +73,9 @@ void main (int argc, char *argv [])
    for (i = 0; i < num_ciphers; i++)
    {
       fgets (buffer, sizeof (buffer), f);
-
-      len [i] = strlen (buffer) - 1;
+      if (buffer [strlen (buffer)] == '\n')
+         buffer [strlen (buffer) - 1] = '\0';
+      len [i] = strlen (buffer);
       ciphers [i] = malloc (sizeof (char) * len [i]);
 
       // Half as many spaces allocated since two characters 

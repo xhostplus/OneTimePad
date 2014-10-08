@@ -81,12 +81,14 @@ void performOTP (char *_message, char *_key)
 
    // Read in the key
    fgets (buffer_k, 1024, k);
-   buffer_k [strlen (buffer_k) - 1] = '\0';
+   if (buffer_k [strlen (buffer_k)] == '\n')
+      buffer_k [strlen (buffer_k) - 1] = '\0';
 
    // Loop, reading in each message
    while (fgets (buffer_m, 1024, m))
    {
-      buffer_m [strlen (buffer_m) - 1] = '\0';
+      if (buffer_m [strlen (buffer_m)] == '\n')
+         buffer_m [strlen (buffer_m) - 1] = '\0';
       i = 0;
       while (buffer_m [i] != '\0')
       {
@@ -110,7 +112,7 @@ void convertStringToHex (char *_filename)
 {
    // Converts to ASCII Hex values
    int i = 0;
-   char buffer [4096];
+   char buffer [1024];
 
    FILE *f = fopen (_filename, "r");
 
@@ -123,6 +125,8 @@ void convertStringToHex (char *_filename)
    // Loop through each line of text
    while (fgets (buffer, sizeof (buffer), f))
    {
+      if (buffer [strlen (buffer)] == '\n')
+         buffer [strlen (buffer) - 1] = '\0';
       i = 0;
       while (buffer [i] != '\0')
       {
